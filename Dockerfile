@@ -27,7 +27,9 @@ COPY workaround/generate_data_config_file.sh \
    ${server_root_path}/workaround/
 COPY workaround/workaround_controller.sh  /docker-entrypoint-initdb.d/
 
-RUN chown solr:solr -R ${server_root_path}/workaround
+RUN chown solr:solr -R ${server_root_path}/workaround && \
+  mkdir "/opt/solr/data" && \
+  chown solr:solr "/opt/solr/data"
 #==============================================================================#
 
 # change the container user back to Solr for future use
