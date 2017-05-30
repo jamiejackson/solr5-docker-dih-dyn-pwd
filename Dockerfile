@@ -28,10 +28,8 @@ COPY workaround/generate_data_config_file.sh \
 COPY workaround/workaround_controller.sh  /docker-entrypoint-initdb.d/
 
 RUN chown solr:solr -R ${server_root_path}/workaround && \
-  printf '#!/bin/bash\n \
-  mkdir "/opt/solr/data"\n \
-  chown solr:solr "/opt/solr/data"' \
-  > /docker-entrypoint-initdb.d/fix_data_dir_perms.sh
+  mkdir "/opt/solr/data" && \
+  chown -R solr:solr "/opt/solr/data"
 
 #==============================================================================#
 
